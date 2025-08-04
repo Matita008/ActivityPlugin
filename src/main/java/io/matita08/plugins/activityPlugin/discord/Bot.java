@@ -9,6 +9,9 @@ public class Bot {
    public Bot(String token) {
       JDABuilder builder = JDABuilder.create(token, GatewayIntent.getIntents(5));
       bot = builder.build();
-      
+   }
+   
+   public void disable(){
+      bot.shutdown();
    }
 }

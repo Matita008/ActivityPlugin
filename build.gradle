@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'org.matita08.plugins'
-version = '1.0-DEV'
+version = '0.3.6'
 
 repositories {
     mavenCentral()
@@ -35,7 +35,7 @@ tasks {
     }
 }
 
-def targetJavaVersion = 17
+def targetJavaVersion = 21
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
@@ -63,7 +63,7 @@ processResources {
 }
 
 jar {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    duplicatesStrategy = DuplicatesStrategy.WARN
     from {
         configurations.runtimeClasspath.collect({
             print it.name
