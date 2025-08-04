@@ -1,0 +1,8 @@
+name: ActivityPlugin
+version: '1.0-DEV'
+main: io.matita08.plugins.activityPlugin.ActivityPlugin
+api-version: '1.21'
+prefix: ActCk
+load: STARTUP
+authors: [ matita08 ]
+description: A plugin to monito player activity
