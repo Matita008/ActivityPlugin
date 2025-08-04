@@ -1,5 +1,7 @@
+//file:noinspection GroovyAssignabilityCheck
 plugins {
     id 'java'
+    //noinspection SpellCheckingInspection
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
@@ -12,10 +14,16 @@ repositories {
         name = "papermc-repo"
         url = "https://repo.papermc.io/repository/maven-public/"
     }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
+    compileOnly("com.velocitypowered:velocity-api:3.4.0-SNAPSHOT")
+    implementation 'net.dv8tion:JDA:5.1.2'
 }
 
 tasks {
@@ -27,7 +35,7 @@ tasks {
     }
 }
 
-def targetJavaVersion = 21
+def targetJavaVersion = 17
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
@@ -51,5 +59,24 @@ processResources {
     filteringCharset 'UTF-8'
     filesMatching('plugin.yml') {
         expand props
+    }
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from {
+        configurations.runtimeClasspath.collect({
+            print it.name
+            if (it.name.contains("JDA") ||
+                    it.name.contains("nv-websocket-client") ||
+                    it.name.contains("okhttp") ||
+                    it.name.contains("kotlin") ||
+                    it.name.contains("okio") ||
+                    it.name.contains("core-3.1.0")) {
+                zipTree(it)
+            }
+            else print " nope"
+            print "\n"
+        })
     }
 }

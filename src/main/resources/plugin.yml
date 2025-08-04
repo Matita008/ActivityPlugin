@@ -5,4 +5,4 @@ api-version: '1.21'
 prefix: ActCk
 load: STARTUP
 authors: [ matita08 ]
-description: A plugin to monito player activity
+description: A plugin to monitor player activity

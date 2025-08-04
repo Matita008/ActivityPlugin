@@ -25,3 +25,9 @@ replay_pid*
 
 #intellij files
 .idea/
+
+# Random gradle stuff
+.gradle/
+
+# Builds
+build/

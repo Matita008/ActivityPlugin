@@ -1,0 +1,7 @@
+bot:
+  # Whenever to enable the discord bot
+  #
+  # Allowed values: true, false
+  enabled: false
+  # The discord bot token, will b used only if the bot is enabled
+  token: "Insert-token"
