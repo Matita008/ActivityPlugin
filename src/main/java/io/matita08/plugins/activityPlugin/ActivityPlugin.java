@@ -4,6 +4,7 @@ import io.matita08.plugins.activityPlugin.data.Memory;
 import io.matita08.plugins.activityPlugin.discord.Bot;
 import io.matita08.plugins.activityPlugin.listeners.ActivityListener;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -17,11 +18,11 @@ public final class ActivityPlugin extends JavaPlugin {
    
    public final Logger LOG = getLogger();
    
-   public final File storage = new File(getDataFolder(), "times.yml");
    public YamlConfiguration configs;
+   public final File storage = new File(getDataFolder(), configs.getString("activity.storage.file", "activity.yml"));
    public BukkitTask saveTask;
    
-   private final ActivityListener listener = new ActivityListener(LOG);
+   private final ActivityListener listener = new ActivityListener(this);
    
    private boolean botEnabled = false;
    
@@ -73,8 +74,10 @@ public final class ActivityPlugin extends JavaPlugin {
       } else LOG.info("Skipping discord bot");
       
       Bukkit.getPluginManager().registerEvents(listener, this);
-      if(configs.getBoolean("data.activity.autosave.enabled"))
-         saveTask = Bukkit.getScheduler().runTaskTimer(this, Memory::save, configs.getInt("data.activity.autosave.delay") * 20L, configs.getInt("data.activity.autosave.interval") * 20L);
+      ConfigurationSection dataSection = configs.getConfigurationSection("activity.storage.autosave");
+      if(dataSection != null && dataSection.getBoolean("enabled"))
+         saveTask = Bukkit.getScheduler().runTaskTimer(this, Memory::save, dataSection.getInt("delay") * 20L,
+             Math.min(dataSection.getInt("interval"), 60) * 20L);
       
       LOG.info("Plugin enabled successfully");
    }

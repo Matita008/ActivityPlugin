@@ -1,20 +1,37 @@
 #TODO header
 
-# Discord bot configurations
+# Discord bot configuration
 bot:
   # Whenever to enable the discord bot
   #
   # Allowed values: true, false
+  # Default false
   enabled: false
-  # The discord bot token, will b used only if the bot is enabled
+  # The discord bot token, will be used only if the bot is enabled
   token: "Insert-token-here"
-#TODO comment
-data:
-  activity:
-   file: "times.yml"
+activity:
+  # Configuration for how to store the activity data
+  storage:
+    # The file for saving the activity data
+    # It will be in the plugin configuration subfolder
+   file: "activity.yml"
+   # Autosave configuration
+   # All times are in seconds
    autosave:
-     #seconds
+     # Whenever to enable the autosave feature
+     # Allowed values: true, false
+     # Default true
      enabled: true
-     interval: 600
-     # First interval
+     # The interval between auto saves
+     # Must be greater than 60
+     # Default 300 (5 Minutes)
+     interval: 300
+     # The delay before doing the first autosave
+     # Default 120
      delay: 120
+   # Minimum time (in seconds) a player must stay on before it's registered
+   minimum:
+     # Default 120
+     kick: 120
+     # Default 60
+     quit: 60

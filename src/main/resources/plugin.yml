@@ -1,5 +1,5 @@
 name: ActivityPlugin
-version: '0.3.6'
+version: '0.3.7'
 main: io.matita08.plugins.activityPlugin.ActivityPlugin
 api-version: '1.21'
 prefix: ActCk
