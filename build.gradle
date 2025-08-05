@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'org.matita08.plugins'
-version = '0.4.2'
+version = '0.5.1'
 
 repositories {
     mavenCentral()
@@ -72,6 +72,7 @@ jar {
                     it.name.contains("okhttp") ||
                     it.name.contains("kotlin") ||
                     it.name.contains("okio") ||
+                    it.name.contains("commons-collections") ||
                     it.name.contains("core-3.1.0")) {
                 print " yes"
             } else print " nope"

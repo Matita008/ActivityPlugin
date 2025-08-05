@@ -1,5 +1,6 @@
 package io.matita08.plugins.activityPlugin;
 
+import io.matita08.plugins.ActivityCommand;
 import io.matita08.plugins.activityPlugin.data.Memory;
 import io.matita08.plugins.activityPlugin.discord.Bot;
 import io.matita08.plugins.activityPlugin.listeners.ActivityListener;
@@ -77,6 +78,7 @@ public final class ActivityPlugin extends JavaPlugin {
          saveTask = Bukkit.getScheduler().runTaskTimer(this, Memory::save, dataSection.getInt("delay") * 20L,
              Math.min(dataSection.getInt("interval"), 60) * 20L);
       
+      getCommand("activity").setExecutor(new ActivityCommand());
       LOG.info("Plugin enabled successfully");
    }
 }

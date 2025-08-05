@@ -1,8 +1,17 @@
 name: ActivityPlugin
-version: '0.4.2'
+version: '0.5.1'
 main: io.matita08.plugins.activityPlugin.ActivityPlugin
 api-version: '1.21'
 prefix: ActCk
 load: STARTUP
 authors: [ matita08 ]
 description: A plugin to monitor player activity
+permissions:
+  ActCk.activity:
+    default: op
+    description: Allow the use of /activity
+commands:
+  activity:
+    description: Check a player playtime
+    permission: ActCk.activity
+    usage: /activity <player>
