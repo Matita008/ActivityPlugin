@@ -42,12 +42,8 @@ public final class ActivityPlugin extends JavaPlugin {
    public void onDisable() {
       if(botEnabled) bot.disable();
       if(saveTask != null) saveTask.cancel();
-      net.dv8tion.jda.api.JDABuilder b = net.dv8tion.jda.api.JDABuilder.createLight("test");
       listener.stop();
       Memory.save();
-      LOG.warning("Test start");
-      LOG.severe(b.toString());
-      
       LOG.info("Plugin disabled successfully");
    }
    

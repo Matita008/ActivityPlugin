@@ -21,8 +21,8 @@ public class DiscordListener extends ListenerAdapter {
    @Override
    public void onReady(@Nonnull ReadyEvent e) {
       jda.updateCommands().addCommands(
-          Commands.slash("activity","Get ").addOptions(
-              new OptionData(OptionType.STRING, "name", "", true)
+          Commands.slash("activity","Get the minecraft playtime of a user").addOptions(
+              new OptionData(OptionType.STRING, "name", "the name of the minecraft account to show", true)
           ).setDefaultPermissions(DefaultMemberPermissions.enabledFor(536870912)).setGuildOnly(true))
          .queue();
       LOG.info("Reloaded commands correctly");

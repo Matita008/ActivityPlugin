@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'org.matita08.plugins'
-version = '0.4.1'
+version = '0.4.2'
 
 repositories {
     mavenCentral()
@@ -85,14 +85,19 @@ jar {
 
 task fatJar(type: Jar) {
     duplicatesStrategy = DuplicatesStrategy.WARN
-    from { configurations.runtimeClasspath.collect {
-        if (it.name.contains("JDA") ||
-                it.name.contains("nv-websocket-client") ||
-                it.name.contains("okhttp") ||
-                it.name.contains("kotlin") ||
-                it.name.contains("okio") ||
-                it.name.contains("core-3.1.0"))  it.isDirectory() ? it : zipTree(it)
-    } }
+    from {
+        configurations.runtimeClasspath.collect {
+            if (it.name.contains("JDA") ||
+                    it.name.contains("nv-websocket-client") ||
+                    it.name.contains("okhttp") ||
+                    it.name.contains("kotlin") ||
+                    it.name.contains("okio") ||
+                    it.name.contains("core-3.1.0"))
+                it.isDirectory() ? it : zipTree(it)
+            else null
+        }
+    }
+    exclude("META-INF/versions/")
     with jar
     destinationDirectory.set(layout.buildDirectory.dir("fatJar"))
 }
