@@ -5,7 +5,6 @@ import io.matita08.plugins.activityPlugin.data.Memory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.*;
 import org.bukkit.event.player.*;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.time.*;
 import java.util.HashMap;

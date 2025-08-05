@@ -18,7 +18,7 @@ public final class ActivityPlugin extends JavaPlugin {
    
    public final Logger LOG = getLogger();
    
-   public YamlConfiguration configs;
+   public final YamlConfiguration configs = (YamlConfiguration)getConfig();
    public final File storage = new File(getDataFolder(), configs.getString("activity.storage.file", "activity.yml"));
    public BukkitTask saveTask;
    
@@ -42,9 +42,11 @@ public final class ActivityPlugin extends JavaPlugin {
    public void onDisable() {
       if(botEnabled) bot.disable();
       if(saveTask != null) saveTask.cancel();
-      
+      net.dv8tion.jda.api.JDABuilder b = net.dv8tion.jda.api.JDABuilder.createLight("test");
       listener.stop();
       Memory.save();
+      LOG.warning("Test start");
+      LOG.severe(b.toString());
       
       LOG.info("Plugin disabled successfully");
    }
@@ -52,11 +54,11 @@ public final class ActivityPlugin extends JavaPlugin {
    @Override
    public void onEnable() {
       saveDefaultConfig();
-      configs = (YamlConfiguration)getConfig();
       if(!storage.exists()) {
          try {
             storage.createNewFile();
          } catch (IOException e) {
+            LOG.severe("Unable to create the db file");
             throw new RuntimeException(e);
          }
       }

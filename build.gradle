@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'org.matita08.plugins'
-version = '0.3.7'
+version = '0.4.1'
 
 repositories {
     mavenCentral()
@@ -63,9 +63,9 @@ processResources {
 }
 
 jar {
-    duplicatesStrategy = DuplicatesStrategy.WARN
+    duplicatesStrategy = DuplicatesStrategy.FAIL
     from {
-        configurations.runtimeClasspath.collect({
+        configurations.runtimeClasspath.collect {
             print it.name
             if (it.name.contains("JDA") ||
                     it.name.contains("nv-websocket-client") ||
@@ -73,10 +73,26 @@ jar {
                     it.name.contains("kotlin") ||
                     it.name.contains("okio") ||
                     it.name.contains("core-3.1.0")) {
-                zipTree(it)
-            }
-            else print " nope"
+                print " yes"
+            } else print " nope"
+            if(it.isDirectory()) print " dir"
             print "\n"
-        })
+            it.isDirectory() ? it : zipTree(it)
+        }
+        destinationDirectory.set(layout.buildDirectory.dir("final"))
     }
+}
+
+task fatJar(type: Jar) {
+    duplicatesStrategy = DuplicatesStrategy.WARN
+    from { configurations.runtimeClasspath.collect {
+        if (it.name.contains("JDA") ||
+                it.name.contains("nv-websocket-client") ||
+                it.name.contains("okhttp") ||
+                it.name.contains("kotlin") ||
+                it.name.contains("okio") ||
+                it.name.contains("core-3.1.0"))  it.isDirectory() ? it : zipTree(it)
+    } }
+    with jar
+    destinationDirectory.set(layout.buildDirectory.dir("fatJar"))
 }
