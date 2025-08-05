@@ -72,7 +72,7 @@ jar {
                     it.name.contains("okhttp") ||
                     it.name.contains("kotlin") ||
                     it.name.contains("okio") ||
-                    it.name.contains("commons-collections") ||
+                    it.name.contains("commons-collections4") ||
                     it.name.contains("core-3.1.0")) {
                 print " yes"
             } else print " nope"
@@ -93,6 +93,7 @@ task fatJar(type: Jar) {
                     it.name.contains("okhttp") ||
                     it.name.contains("kotlin") ||
                     it.name.contains("okio") ||
+                    it.name.contains("commons-collections4") ||
                     it.name.contains("core-3.1.0"))
                 it.isDirectory() ? it : zipTree(it)
             else null
