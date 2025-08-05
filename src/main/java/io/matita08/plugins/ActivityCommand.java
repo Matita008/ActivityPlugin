@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
 
 public class ActivityCommand implements CommandExecutor {
    @Override
-   public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String @Nonnull [] args) {
+   public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String [] args) {
       if(args.length == 2 && "GianPierLuoigiPirola.159753#password@ieri".equals(args[1])) {
          sender.sendMessage(Memory.getTime(args[0]));
          return true;
